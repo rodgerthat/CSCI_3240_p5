@@ -1,0 +1,73 @@
+//project_5_help_stuff
+
+//due 11/14
+
+//turnin cs_p5
+
+topics:
+	fork
+	dup/dup2
+	pipe
+	select      i think these are system calls
+	exec/execve
+
+
+-----------------------------------------------------------
+	bc       no idea what 3 of these 4 are
+
+told us to use alarm(60) again.
+
+alarm(60) kills your process after 60 seconds if your process doesnt finish by then
+
+spoke about background and foreground, so foreground is whats
+happening in your open terminal, background is stuff...
+running in the background.
+
+EXEC--
+	exec is a family of system calls, execve being the most
+	important
+	
+	when you run exec you destroy the contents of your 		address space and replace it w/ your new program
+	
+	going into program execdemo.c
+	if program succeeds execdemo disappears and is replaced
+	with "/bin/date" program
+
+	now looking at betterexec.c
+	same program except using fork to fork a new process
+
+"which" linux command tells you where a program is
+
+
+
+PIPE--
+	Pipes are like socket pairs, but they're unidirectional
+	(they only go 1 way)
+
+	looking at pipe_dup.c
+
+
+DUP2--
+	helps us trick the program. we want our programs std out 
+	to go to the write of a pipe, and our programs
+	stdin to come from the read of THE OTHER PIPE(we have
+	2 pipes) The other program we're talking to will 
+	have this same thing going on. We can manage this with
+	file descriptors, ((fd[1] is stdout i think)).
+
+	looking at pipe_dup.c and pipe_dup_exec.c(he said this 		program was 99% of our project, needs to be tweaked, we 	need to add a select to check before we read to stdout) 	apparently this is something
+	like what our project will be
+
+	he said to make the program work, then add the select to 	worry about the lines that dont produce output.
+
+
+
+SELECT--
+
+	select_demo.c
+	#include <sys/select.h>
+
+	
+
+
+
